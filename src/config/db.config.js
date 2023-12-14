@@ -2,6 +2,6 @@ module.exports = {
     HOST: "localhost",
     USER: "root",
     PASSWORD: "root",
-    DB: "facebook",
+    DB: "pizza_delivery",
     dialect: "mysql"
   }
