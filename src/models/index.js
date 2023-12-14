@@ -40,7 +40,7 @@ db.order.belongsTo(db.user, {
 
 // Address Relation
  db.address.belongsTo(db.user, {
-    foreignKey: 'user_name'
+    foreignKey: 'user_id'
   });
   db.user.hasMany(db.address, {
     foreignKey: 'user_id'
@@ -58,7 +58,7 @@ db.order.belongsTo(db.user, {
         foreignKey: 'user_id'
       });
 db.user.hasMany(db.shopping_cart,{
-  foreignKey: 'user_name'
+  foreignKey: 'user_id'
 })
 
 module.exports = db;
