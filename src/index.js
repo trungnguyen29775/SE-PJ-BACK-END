@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
-db.sequelize.sync({alter:true})
+// db.sequelize.sync({alter:true})
 
 
 app.listen(port,()=>
