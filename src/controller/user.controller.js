@@ -1,10 +1,8 @@
-
-module.exports = app =>
-{
-    const userService = require('../service/user.service')
+module.exports = (app) => {
+    const userService = require('../service/user.service');
     var router = require('express').Router();
-    
 
-    app.use('/',router);
-}
-
+    router.get('/login', userService.login);
+    router.post('/signup', userService.signup);
+    app.use('/', router);
+};
