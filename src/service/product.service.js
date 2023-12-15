@@ -24,7 +24,7 @@ exports.create = async (req,res) =>
         else
         {
             await Product.create(product)
-            res.redirect('/')
+            res.send(200)("Create Product succeed!")
         }
     }
     catch(err)

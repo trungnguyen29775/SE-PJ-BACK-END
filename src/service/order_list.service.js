@@ -3,8 +3,15 @@ const List = db.order_list
 var fs = require('fs');
 
 exports.viewList = async (req, res) => {
-  const list = await List.findAll({where : {order_id: req.order_id}});
-  res.json(cart)
+    try
+    {
+        const list = await List.findAll({where : {order_id: req.order_id}});
+        res.json(list)
+    }
+    catch(err)
+    {
+        res.send("Error")
+    }
 };
 
 
@@ -15,7 +22,7 @@ exports.addProduct = async (req,res)=>{
             product_id : req.body.product_id,
             order_id: req.body.order_id
         })
-        res.redirect('/')
+        res.send(200)("Add product succeed!")
     }
     catch(err)
     {

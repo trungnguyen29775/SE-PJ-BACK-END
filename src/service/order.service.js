@@ -20,21 +20,31 @@ exports.create = async (req,res) =>
             deliveryDate: req.body.deliveryDate
         }
         await Order.create(newOrder);
-        res.redirect('/');
+        res.send(200)("Create Order Succeed!");
     }
     catch(err)
     {
-        console.log("Error due to ",err)
+      res.send(500)("Error due to", err)
+
     }
 }
 
 exports.view = async (req, res) => {
-  const orders = await Order.findAll({
-    where : {
-        user_id : req.body.user_id,
-    }
-  });
-  res.json(orders);
+  try
+  {
+    const orders = await Order.findAll({
+      where : {
+          user_id : req.body.user_id,
+      }
+    });
+    res.json(orders);
+
+  }
+  catch(err)
+  {
+    res.send(500)("Error due to", err)
+  }
+ 
 };
 
 exports.destroy = async (req,res)=>
@@ -51,11 +61,12 @@ exports.destroy = async (req,res)=>
         Order.destroy({where:{order_id:order.order_id}
       })
       }
-      res.redirect('/')
+      res.send(200)("Delete Order succeed")
     }
     catch(err)
     {
-      res.send('Error due to ',err)
+      res.send(500)("Error due to", err)
+
     }
    
 }

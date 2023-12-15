@@ -7,32 +7,6 @@ exports.viewCart = async (req, res) => {
   res.json(cart)
 };
 
-exports.update = async (req,res)=>
-{
-    const Identify_card_ID = req.body.Identify_card_ID;
-    const newPerson = await People.findOne({where:{Identify_card_ID:Identify_card_ID}})
-    console.log(Identify_card_ID)
-    if(!newPerson)
-    {
-      res.send('Could not find this person')
-    }
-    else
-    {
-      newPerson.Name = req.body.Name;
-      newPerson.Address=req.body.Address;
-      newPerson.Dob=req.body.Dob;
-      newPerson.Nationality=req.body.Nationality;
-      try
-      {
-        await newPerson.save();
-        res.redirect('/people')
-      }
-      catch(err)
-      {
-        console.log('Some thing went wrong due to ',err)
-      }
-    }
-}
 
 exports.addProduct = async (req,res)=>{    
     try{
