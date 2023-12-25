@@ -24,14 +24,27 @@ exports.signup = async (req, res) => {
             password: req.body.password,
             isAdmin: false,
         };
-        console.log(newUser);
-        const checkName = await User.findOne({ where: { email: newUser.email } });
-        if (checkName) {
-            res.send('The email already exist.');
-        } else {
-            await User.create(newUser);
-            res.send('Create succeed');
-        }
+
+        const responseData = {
+            name: newUser.name,
+            email: newUser.email,
+            isAdmin: newUser.isAdmin,
+        };
+        res.status(200).send(responseData);
+
+        // console.log(newUser);
+        // const checkName = await User.findOne({ where: { email: newUser.email } });
+        // if (checkName) {
+        //     res.send('The email already exist.');
+        // } else {
+        //     await User.create(newUser);
+        //     const responseData = {
+        //         name: newUser.name,
+        //         email: newUser.email,
+        //         isAdmin: newUser.isAdmin,
+        //     };
+        //     res.send(responseData);
+        // }
     } catch (err) {
         res.status(500).send(`Error due to ${err}`);
     }
