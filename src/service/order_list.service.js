@@ -4,7 +4,7 @@ var fs = require('fs');
 
 exports.viewList = async (req, res) => {
     try {
-        const list = await List.findAll({ where: { order_id: req.order_id } });
+        const list = await List.findAll({ where: { order_id: req.body.order_id } });
         res.json(list);
     } catch (err) {
         res.send('Error');
