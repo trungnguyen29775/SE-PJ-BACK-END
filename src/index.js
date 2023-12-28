@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 // db.sequelize.sync({ alter: true });
 
 require('./controller/user.controller')(app);
+require('./controller/address.controller')(app);
 
 app.listen(port, () => {
     console.log('Listen on port ', port);
