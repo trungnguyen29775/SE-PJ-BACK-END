@@ -3,7 +3,7 @@ const Address = db.address;
 
 exports.viewAddress = async (req, res) => {
     try {
-        const address = await Address.findAll({ where: { userId: req.body.userId } });
+        const address = await Address.findAll({ where: { user_id: req.body.userId } });
         res.json(address);
         console.log(address);
     } catch (err) {
@@ -14,6 +14,7 @@ exports.viewAddress = async (req, res) => {
 exports.addAddress = async (req, res) => {
     try {
         const newAddress = {
+            user_id: req.body.userId,
             name: req.body.name,
             address: req.body.address,
             pinCode: req.body.pinCode,
@@ -24,7 +25,7 @@ exports.addAddress = async (req, res) => {
         };
         await Address.create(newAddress);
 
-        res.send(200)('Success');
+        res.status(200).send('Success');
     } catch (err) {
         res.status(401).send(`Error due to ${err}`);
     }
@@ -32,7 +33,8 @@ exports.addAddress = async (req, res) => {
 
 exports.removeAddress = async (req, res) => {
     try {
-        await Address.destroy({ where: { address_id: req.body.address_id } });
+        await Address.destroy({ where: { address_id: req.body.addressId, user_id: req.body.userId } });
+        res.send('deleted!');
     } catch (err) {
         res.send(err);
     }

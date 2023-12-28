@@ -17,7 +17,7 @@ exports.login = async (req, res) => {
             res.status(200).send(responseDate);
         }
     } else {
-        res.send(500)("User name doesn't exist.");
+        res.status(500).send("User name doesn't exist.");
     }
 };
 
