@@ -25,12 +25,16 @@ module.exports = (sequelize, Sequelize) => {
                 allowNull: false,
             },
             description: {
-                type: Sequelize.STRING,
+                type: Sequelize.TEXT,
                 allowNull: false,
             },
             countInStock: {
                 type: Sequelize.STRING,
                 allowNull: false,
+            },
+            image_path: {
+                type: Sequelize.STRING,
+                allowNull: true,
             },
         },
         {
