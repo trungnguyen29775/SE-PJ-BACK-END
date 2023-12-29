@@ -9,12 +9,13 @@ exports.login = async (req, res) => {
     const checkName = await User.findOne({ where: { email: user.email } });
     if (checkName) {
         if (user.password === checkName.password) {
-            const responseDate = {
+            const responseData = {
                 name: checkName.name,
                 email: checkName.email,
                 userId: checkName.user_id,
+                isAdmin: checkName.isAdmin,
             };
-            res.status(200).send(responseDate);
+            res.status(200).send(responseData);
         }
     } else {
         res.status(500).send("User name doesn't exist.");

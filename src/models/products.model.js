@@ -4,15 +4,11 @@ module.exports = (sequelize, Sequelize) => {
         'products',
         {
             product_id: {
-                type: DataTypes.INTEGER,
+                type: Sequelize.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
             },
             name: {
-                type: Sequelize.STRING,
-                allowNull: false,
-            },
-            category: {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
@@ -21,7 +17,7 @@ module.exports = (sequelize, Sequelize) => {
                 allowNull: false,
             },
             price: {
-                type: DataTypes.STRING,
+                type: Sequelize.STRING,
                 allowNull: false,
             },
             rating: {
