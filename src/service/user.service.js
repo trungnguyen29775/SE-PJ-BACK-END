@@ -13,6 +13,7 @@ exports.login = async (req, res) => {
                 name: checkName.name,
                 email: checkName.email,
                 userId: checkName.user_id,
+                isAdmin: checkName.isAdmin,
             };
             res.status(200).send(responseDate);
         }
