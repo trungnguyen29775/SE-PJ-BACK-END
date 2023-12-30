@@ -2,7 +2,7 @@ const db = require('../models');
 const Product = db.products;
 var fs = require('fs');
 exports.create = async (req, res) => {
-    try {
+   try {
         const newProduct = {
             name: req.body.name,
             type: req.body.type,
@@ -10,12 +10,17 @@ exports.create = async (req, res) => {
             rating: req.body.rating,
             description: req.body.description,
             countInStock: req.body.countInStock,
+            image_path: req.body.imagePath,
         };
-
-        await Product.create(newProduct);
-        res.send(200)('Create Product succeed!');
+        const check = await Product.findOne({ where: { name: newProduct.name } });
+        if (check) {
+            res.send('The product ID already exist.');
+        } else {
+            await Product.create(newProduct);
+            res.status(200).send('Create Product succeed!');
+        }
     } catch (err) {
-        console.log(`Error due to ${err}`);
+        console.log('Error due to ', err);
     }
 };
 
