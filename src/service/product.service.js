@@ -2,7 +2,7 @@ const db = require('../models');
 const Product = db.products;
 var fs = require('fs');
 exports.create = async (req, res) => {
-   try {
+    try {
         const newProduct = {
             name: req.body.name,
             type: req.body.type,
@@ -26,7 +26,7 @@ exports.create = async (req, res) => {
 
 exports.view = async (req, res) => {
     const products = await Product.findAll();
-    res.json(products);
+    res.status(200).send(products);
 };
 
 exports.update = async (req, res) => {
@@ -59,16 +59,17 @@ exports.update = async (req, res) => {
 };
 
 exports.delete = async (req, res) => {
-    const product_id = req.body.product_id;
+    const product_id = req.body.productId;
+    console.log('Hello');
     try {
-        const product = await People.findOne({ where: { product_id: product_id } });
+        const product = await Product.findOne({ where: { product_id: product_id } });
         if (!product) {
             res.send('This product is not exist');
         } else {
-            People.destroy({ where: { product_id: product.product_id } });
+            Product.destroy({ where: { product_id: product.product_id } });
+            res.status(200).send(product);
         }
-        res.redirect('/');
     } catch (err) {
-        res.send('Error due to ', err);
+        res.status(500);
     }
 };
