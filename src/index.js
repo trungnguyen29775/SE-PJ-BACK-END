@@ -14,6 +14,7 @@ app.use(bodyParser.json());
 require('./controller/user.controller')(app);
 require('./controller/address.controller')(app);
 require('./controller/products.controller')(app);
+require('./controller/favorite.controller')(app);
 
 app.listen(port, () => {
     console.log('Listen on port ', port);
