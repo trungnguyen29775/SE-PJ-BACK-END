@@ -2,7 +2,7 @@ const db = require('../models');
 const Product = db.products;
 var fs = require('fs');
 exports.create = async (req, res) => {
-    try {
+   try {
         const newProduct = {
             name: req.body.name,
             type: req.body.type,
