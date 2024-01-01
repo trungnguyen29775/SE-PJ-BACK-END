@@ -1,7 +1,7 @@
 module.exports = (app) => {
     const productsService = require('../service/product.service');
     var router = require('express').Router();
-    router.get('/view-products', productsService.view);
-    router.post('/add-products', productsService.create);
+    router.post('/view-products', productService.view);
+    router.post('/add-products', productService.create);
     app.use('/', router);
 };
