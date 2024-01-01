@@ -33,7 +33,7 @@ exports.addFavorite = async (req, res) => {
 exports.removeFavorite = async (req, res) => {
     try {
         await Favorite.destroy({ where: { user_id: req.body.userId, product_id: req.body.productId } });
-        res.send('deleted!');
+        res.status(200).send('deleted!');
     } catch (err) {
         res.send(err);
     }
