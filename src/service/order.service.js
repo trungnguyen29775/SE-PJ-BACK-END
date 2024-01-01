@@ -4,6 +4,7 @@ var fs = require('fs');
 exports.create = async (req, res) => {
     try {
         const newOrder = {
+            user_id: req.body.userId,
             shippingAddress: req.body.shippingAddress,
             paymentMethod: req.body.paymentMethod,
             shippingPrice: req.body.shippingAddress,
@@ -14,10 +15,6 @@ exports.create = async (req, res) => {
             deliveryDate: req.body.deliveryDate,
         };
         const lastestOrder = await Order.create(newOrder);
-        // const lastestOrder = await Order.findAll({
-        //     attributes: [[db.sequelize.fn('max', db.sequelize.col('order_id')), 'lastOrderID']],
-        //     raw: true,
-        // });
         res.status(200).send(lastestOrder);
     } catch (err) {
         res.status(500).send(`Error due to ${err}`);
