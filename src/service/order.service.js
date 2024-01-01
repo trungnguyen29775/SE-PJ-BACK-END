@@ -7,7 +7,7 @@ exports.create = async (req, res) => {
             user_id: req.body.userId,
             shippingAddress: req.body.shippingAddress,
             paymentMethod: req.body.paymentMethod,
-            shippingPrice: req.body.shippingAddress,
+            shippingPrice: req.body.shippingPrice,
             totalPrice: req.body.totalPrice,
             isPaid: req.body.isPaid,
             isDelivered: req.body.isDelivered,
