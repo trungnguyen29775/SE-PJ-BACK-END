@@ -25,19 +25,11 @@ module.exports = (sequelize, Sequelize) => {
                 allowNull: false,
             },
             isPaid: {
-                type: Sequelize.STRING,
-                allowNull: false,
-            },
-            paidAt: {
-                type: Sequelize.STRING,
+                type: Sequelize.BOOLEAN,
                 allowNull: false,
             },
             isDelivered: {
-                type: Sequelize.STRING,
-                allowNull: false,
-            },
-            isPlaced: {
-                type: DataTypes.STRING,
+                type: Sequelize.BOOLEAN,
                 allowNull: false,
             },
             isShipped: {

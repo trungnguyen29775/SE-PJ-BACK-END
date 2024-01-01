@@ -31,7 +31,6 @@ exports.signup = async (req, res) => {
             isAdmin: false,
         };
 
-        console.log(newUser);
         const checkName = await User.findOne({ where: { email: newUser.email } });
         if (checkName) {
             res.send('The email already exist.');
