@@ -14,6 +14,7 @@ exports.login = async (req, res) => {
                 email: checkName.email,
                 userId: checkName.user_id,
                 isAdmin: checkName.isAdmin,
+                phoneNum: checkName.phoneNum,
             };
             res.status(200).send(responseData);
         }
@@ -31,7 +32,6 @@ exports.signup = async (req, res) => {
             isAdmin: false,
         };
 
-        console.log(newUser);
         const checkName = await User.findOne({ where: { email: newUser.email } });
         if (checkName) {
             res.send('The email already exist.');
@@ -49,6 +49,30 @@ exports.signup = async (req, res) => {
     }
 };
 
+exports.updateInfo = async (req, res) => {
+    try {
+        const newInfo = await User.update(
+            {
+                email: req.body.email,
+                phoneNum: req.body.phoneNum,
+                name: req.body.name,
+            },
+            {
+                where: {
+                    user_id: req.body.user_id,
+                },
+            },
+        );
+        res.status(200).send({
+            email: req.body.email,
+            phoneNum: req.body.phoneNum,
+            name: req.body.name,
+            user_id: req.body.user_id,
+        });
+    } catch (err) {
+        res.status(500).send(`Error due to ${err}`);
+    }
+};
 exports.changePassword = async (req, res) => {
     try {
         await User.update(

@@ -9,15 +9,15 @@ module.exports = (sequelize, Sequelize) => {
                 autoIncrement: true,
             },
             shippingAddress: {
-                type: Sequelize.STRING,
+                type: DataTypes.STRING,
                 allowNull: false,
             },
             paymentMethod: {
-                type: Sequelize.STRING,
+                type: DataTypes.STRING,
                 allowNull: false,
             },
             shippingPrice: {
-                type: Sequelize.STRING,
+                type: DataTypes.STRING,
                 allowNull: false,
             },
             totalPrice: {
@@ -25,19 +25,11 @@ module.exports = (sequelize, Sequelize) => {
                 allowNull: false,
             },
             isPaid: {
-                type: Sequelize.STRING,
-                allowNull: false,
-            },
-            paidAt: {
-                type: Sequelize.STRING,
+                type: DataTypes.BOOLEAN,
                 allowNull: false,
             },
             isDelivered: {
-                type: Sequelize.STRING,
-                allowNull: false,
-            },
-            isPlaced: {
-                type: DataTypes.STRING,
+                type: DataTypes.BOOLEAN,
                 allowNull: false,
             },
             isShipped: {

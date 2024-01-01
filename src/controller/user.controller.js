@@ -5,5 +5,6 @@ module.exports = (app) => {
 
     router.post('/sign-in', userService.login);
     router.post('/sign-up', userService.signup);
+    router.post('/update-info', userService.updateInfo);
     app.use('/', router);
 };

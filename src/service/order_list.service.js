@@ -14,13 +14,13 @@ exports.viewList = async (req, res) => {
 exports.addProduct = async (req, res) => {
     try {
         await List.create({
-            order_list_id: req.body.order_list_id,
             product_id: req.body.product_id,
             order_id: req.body.order_id,
+            quantity: req.body.quantity,
         });
-        res.send(200)('Add product succeed!');
+        res.status(200).send('Add product succeed!');
     } catch (err) {
-        res.send('Error due to ', err);
+        res.status(500).send(`Error due to ${err}`);
     }
 };
 

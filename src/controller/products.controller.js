@@ -4,5 +4,6 @@ module.exports = (app) => {
     router.get('/view-product', productService.view);
     router.post('/add-product', productService.create);
     router.post('/delete-product', productService.delete);
+
     app.use('/', router);
 };
