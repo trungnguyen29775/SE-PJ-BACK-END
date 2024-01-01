@@ -1,5 +1,7 @@
 const db = require('../models');
 const User = db.user;
+const Favorite = db.favorite;
+const Products = db.products;
 
 exports.login = async (req, res) => {
     const user = {
@@ -9,12 +11,19 @@ exports.login = async (req, res) => {
     const checkName = await User.findOne({ where: { email: user.email } });
     if (checkName) {
         if (user.password === checkName.password) {
+            const favorite = await Favorite.findAll({ where: { user_id: checkName.user_id } });
+            const responseProducts = [];
+            for (let i = 0; i < favorite.length; i++) {
+                const product = await Products.findOne({ where: { product_id: favorite[i].product_id } });
+                responseProducts.push(product);
+            }
             const responseData = {
                 name: checkName.name,
                 email: checkName.email,
                 userId: checkName.user_id,
                 isAdmin: checkName.isAdmin,
                 phoneNum: checkName.phoneNum,
+                favorite: responseProducts,
             };
             res.status(200).send(responseData);
         }
@@ -51,7 +60,7 @@ exports.signup = async (req, res) => {
 
 exports.updateInfo = async (req, res) => {
     try {
-        const newInfo = await User.update(
+        await User.update(
             {
                 email: req.body.email,
                 phoneNum: req.body.phoneNum,
@@ -63,12 +72,7 @@ exports.updateInfo = async (req, res) => {
                 },
             },
         );
-        res.status(200).send({
-            email: req.body.email,
-            phoneNum: req.body.phoneNum,
-            name: req.body.name,
-            user_id: req.body.user_id,
-        });
+        res.status(200).send('Succeed');
     } catch (err) {
         res.status(500).send(`Error due to ${err}`);
     }

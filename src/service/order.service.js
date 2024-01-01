@@ -30,7 +30,7 @@ exports.view = async (req, res) => {
         });
         res.json(orders);
     } catch (err) {
-        res.send(500)('Error due to', err);
+        res.status(500).send('Error due to', err);
     }
 };
 
