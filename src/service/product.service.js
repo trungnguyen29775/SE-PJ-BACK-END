@@ -1,5 +1,6 @@
 const db = require('../models');
 const Product = db.products;
+const { Op } = require('sequelize');
 var fs = require('fs');
 exports.create = async (req, res) => {
     try {
@@ -16,8 +17,8 @@ exports.create = async (req, res) => {
         if (check) {
             res.send('The product ID already exist.');
         } else {
-            await Product.create(newProduct);
-            res.status(200).send('Create Product succeed!');
+            const responseData = await Product.create(newProduct);
+            res.status(200).send(responseData);
         }
     } catch (err) {
         console.log('Error due to ', err);
@@ -60,7 +61,7 @@ exports.update = async (req, res) => {
 
 exports.delete = async (req, res) => {
     const product_id = req.body.productId;
-    console.log('Hello');
+    console.log(product_id);
     try {
         const product = await Product.findOne({ where: { product_id: product_id } });
         if (!product) {
@@ -72,4 +73,29 @@ exports.delete = async (req, res) => {
     } catch (err) {
         res.status(500);
     }
+};
+
+exports.search = async (req, res) => {
+    Product.findAll({
+        where: {
+            [Op.or]: [
+                {
+                    name: {
+                        [Op.like]: req.body.search,
+                    },
+                },
+                {
+                    type: {
+                        [Op.like]: req.body.search,
+                    },
+                },
+            ],
+        },
+    })
+        .then((result) => {
+            res.send(result);
+        })
+        .catch((err) => {
+            res.status(500).send('Error due to ', err);
+        });
 };
