@@ -1,7 +1,7 @@
 module.exports = {
-    HOST: 'roundhouse.proxy.rlwy.net',
+    HOST: 'localhost',
     USER: 'root',
-    PASSWORD: 'MJZsaQppKxDpoZsqnLkmprnvvNINgwcv',
+    PASSWORD: 'root',
     DB: 'pizza_delivery',
     dialect: 'mysql',
 };
